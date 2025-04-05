@@ -6,6 +6,12 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
+#Origin of files when using google colab
+shapefile_path = '/content/sample_data/GWS_Merge_With_Physics.shp' 
+gdf = gpd.read_file(shapefile_path, encoding='ISO-8859-1', low_memory=False)
+
+#Data preprocessing
+
 columns_to_normalize = ['Gamma_CPS', 'CntTimeS', 'BKGD', 'r']
 def normalize_columns(dataframe, columns):
     if not all(col in dataframe.columns for col in columns):
