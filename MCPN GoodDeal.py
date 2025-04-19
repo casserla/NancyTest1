@@ -1,4 +1,4 @@
-#FIXED IN VISUAL STUDIO CODE, JUST TAKING A HOT MINUTE TO SAVE
+#FIXED IN VISUAL STUDIO CODE, JUST TAKING A HOT MINUTE TO SAVE, #addition of the shapefile path gui.
 import os
 import sqlite3
 import numpy as np
@@ -16,25 +16,75 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-
+import tkinter as tk
+from tkinter import filedialog, messagebox
 #shapefile_path = '/content/sample_data/GWS_Merge_With_Physics.shp'
 #gdf = gpd.read_file(shapefile_path, encoding='ISO-8859-1', low_memory=False)
 
 
-# Get the current working directory (directory of the script)
+def get_shapefile_path():
+    def select_reference_file():
+        filepath = filedialog.askopenfilename(
+            title="Select your reference shapefile",
+            filetypes=[("Shapefiles", "*.shp")]
+        )
+        if filepath:
+            root.quit()
+            root.destroy()
+            main_callback(filepath)
+
+    def select_gws_standard():
+        root.quit()
+        root.destroy()
+        default_path = os.path.join(current_directory, 'GWS_Merge_With_Physics.shp')
+        main_callback(default_path)
+
+    def main_callback(path):
+        global shapefile_path
+        shapefile_path = path
+        print(f"Selected shapefile: {shapefile_path}")
+
+    root = tk.Tk()
+    root.title("Select Shapefile Source")
+    root.geometry("400x200")
+
+    label = tk.Label(root, text="Would you like to use a reference file, or GWSStandard?", font=("Helvetica", 12))
+    label.pack(pady=20)
+
+    ref_button = tk.Button(root, text="Reference File", command=select_reference_file, width=20)
+    ref_button.pack(pady=5)
+
+    gws_button = tk.Button(root, text="GWSStandard", command=select_gws_standard, width=20)
+    gws_button.pack(pady=5)
+
+    root.mainloop()
+
+# Set the working directory
 current_directory = os.getcwd()
-print ("Current Directory location:",current_directory)
+print("Current Directory location:", current_directory)
 
-# Define the relative path to the shapefile in your project
-shapefile_filename = 'GWS_Merge_With_Physics.shp'
+# Prompt for shapefile selection
+get_shapefile_path()
 
-# Combine the current directory with the relative path
-shapefile_path = os.path.join(current_directory, shapefile_filename)
-
-# Read the shapefile using geopandas
+# Proceed with loading the shapefile
 gdf = gpd.read_file(shapefile_path, encoding='ISO-8859-1', low_memory=False)
-
 print(f"Shapefile loaded from: {shapefile_path}")
+
+
+# # Get the current working directory (directory of the script)
+# current_directory = os.getcwd()
+# print ("Current Directory location:",current_directory)
+
+# # Define the relative path to the shapefile in your project
+# shapefile_filename = 'GWS_Merge_With_Physics.shp'
+
+# # Combine the current directory with the relative path
+# shapefile_path = os.path.join(current_directory, shapefile_filename)
+
+# # Read the shapefile using geopandas
+# gdf = gpd.read_file(shapefile_path, encoding='ISO-8859-1', low_memory=False)
+
+# print(f"Shapefile loaded from: {shapefile_path}")
 
 #DATA PRE-PROCESSING
 columns_to_normalize = ['Gamma_CPS', 'CntTimeS', 'BKGD', 'r']
