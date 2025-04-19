@@ -65,3 +65,9 @@ Model Performance Metrics:
 
 Additional metrics such as Mean Absolute Percentage Error (MAPE) or other regression metrics could be considered to get a fuller picture of the model's performance.
 
+## Code Explanation + needed:
+add the runtime and realtime calculation. Calculation of the delays between your model vs. real time detection
+	- how long does the PInn model take to compute new input conditions to generate MDD value.
+	- total time required for training and possible interference with IRL vs Simulation.
+	- whether there is any lag/detection delay when IRL. 
+
