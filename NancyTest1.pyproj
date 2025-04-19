@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c7c7103d-a030-4e6e-b91a-0338f90f5b25</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>NancyTest1.py</StartupFile>
+    <StartupFile>MCPN GoodDeal.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,10 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="NancyTest1.py" />
+    <Compile Include="MCPN GoodDeal.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeExplanation.md" />
+    <Content Include="GWS_Merge_With_Physics.cpg" />
+    <Content Include="GWS_Merge_With_Physics.dbf" />
+    <Content Include="GWS_Merge_With_Physics.prj" />
+    <Content Include="GWS_Merge_With_Physics.shp" />
+    <Content Include="GWS_Merge_With_Physics.shx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
